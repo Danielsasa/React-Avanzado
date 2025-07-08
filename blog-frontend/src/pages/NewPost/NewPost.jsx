@@ -131,10 +131,10 @@ const NewPost = () => {
           <button
             type='button'
             className='btn btn-primary'
-            // TODO: Añadir lógica para deshabilitar si se esta enviando el formulario.
+            disabled={isSubmitting}
             onClick={handleSubmit(onSubmit)}
           >
-            {/* TODO: Añadir texto condicional al botón */}
+            {isSubmitting ? 'Publicando...' : 'Publicar Post'}
             Publicar Post
           </button>
         </div>
