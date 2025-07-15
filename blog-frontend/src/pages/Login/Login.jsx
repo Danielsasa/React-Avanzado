@@ -1,12 +1,14 @@
-import { useForm } from 'react-hook-form'
+import { set, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { loginSchema } from '../../schemas/Login'
 import { toast, ToastContainer } from 'react-toastify'
 import { useAuthContext } from '../../hooks/useAuth'
+import { useNavigate } from 'react-router-dom'
 import './Login.css'
 
 const Login = () => {
   const { login } = useAuthContext()
+  const navigate = useNavigate()
 
   const {
     register,
@@ -44,9 +46,9 @@ const Login = () => {
         pauseOnHover: true,
         draggable: true
       })
-
-      // Aquí iría la lógica de autenticación
-      // Ejemplo: await authService.login(data.email, data.password)
+      setTimeout(() => {
+        navigate('/newpost')
+      }, 1500)
     } catch (error) {
       console.error('Error en el login:', error)
       toast.error(error.message || 'Error al iniciar sesión', {
