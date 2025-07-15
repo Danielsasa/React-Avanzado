@@ -1,3 +1,4 @@
+import { AuthProvider } from './context/AuthContext'
 import { BrowserRouter } from 'react-router-dom'
 import './App.css'
 import BlogRoutes from './routes/BlogRoutes'
@@ -5,7 +6,7 @@ import Header from './components/Header/Header'
 
 function App () {
   return (
-    <>
+    <authProvider>
       <BrowserRouter>
         <Header />
         <div className='app'>
@@ -22,7 +23,7 @@ function App () {
         </div>
       </footer>
 
-    </>
+    </authProvider>
   )
 }
 
