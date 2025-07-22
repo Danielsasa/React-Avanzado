@@ -1,4 +1,4 @@
-// #1 importing the express module
+// #1 importing the express module cambio de puert $env:port=4000; node server.js
 import express from 'express'
 // #2acreating an instance of express
 const app = express()
