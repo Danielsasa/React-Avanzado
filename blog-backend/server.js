@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }))
 
 // #3 defining a simple route
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Saludos G40!')
 })
 // #4 starting the server
 app.listen(port, () => {
