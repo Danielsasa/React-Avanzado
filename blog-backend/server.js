@@ -1,6 +1,7 @@
 // #1 Importar express
 import express from 'express'
 import postsData from './data/posts.json' with { type: 'json' }
+import cors from 'cors'
 
 // #2a Crear una instancia de express (app)
 const app = express()
@@ -11,6 +12,9 @@ app.use(express.json())
 
 // #2c Configurar express para recibir datos de formularios
 app.use(express.urlencoded({ extended: true }))
+
+// #2d Configurar CORS para permitir peticiones desde el frontend
+app.use(cors())
 
 // #3 Definir rutas
 app.get('/', (req, res) => {
