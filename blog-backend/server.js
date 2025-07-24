@@ -1,7 +1,7 @@
 // #1 Importar express
 import express, { json, urlencoded } from 'express'
-import postsData from './data/posts.json' with { type: "json" }
 import cors from 'cors'
+import posRoutes from './routes/posRoutes.js'
 
 // ...el resto de tu código igual...
 
@@ -31,6 +31,9 @@ app.get('/', (req, res) => {
     }
   })
 })
+// integrar las rutas de posts
+app.use('/api/v1/posts', posRoutes)
+
 // #4 starting the server
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
