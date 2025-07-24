@@ -24,6 +24,25 @@ export const getPost = (id) => {
 }
 
 //update
-
-
+export const updatePost = (id, postDataToUpdate) => {
+    const postIndex = postsData.findIndex(post => post.id === parseInt(id))
+    if (postIndex === -1) {
+        return null
+    }
+    const updatedPost = {
+        ...postsData[postIndex],
+        ...postDataToUpdate
+    }
+    postsData[postIndex] = updatedPost
+    return updatedPost
+}
 //delete
+
+export const deletePost = (id) => {
+    const postIndex = postsData.findIndex(post => post.id === parseInt(id))
+    if (postIndex === -1) {
+        return null
+    }
+    postsData.splice(postIndex, 1)
+    return true
+}
