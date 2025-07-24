@@ -1,17 +1,19 @@
 // #1 Importar express
-import express from 'express'
-import postsData from './data/posts.json' with { type: 'json' }
+import express, { json, urlencoded } from 'express'
+import postsData from './data/posts.json' with { type: "json" }
 import cors from 'cors'
+
+// ...el resto de tu código igual...
 
 // #2a Crear una instancia de express (app)
 const app = express()
 const port = process.env.PORT || 3000
 
 // #2b Configurar express para que entienda JSON
-app.use(express.json())
+app.use(json())
 
 // #2c Configurar express para recibir datos de formularios
-app.use(express.urlencoded({ extended: true }))
+app.use(urlencoded({ extended: true }))
 
 // #2d Configurar CORS para permitir peticiones desde el frontend
 app.use(cors())
@@ -37,7 +39,7 @@ app.get('/api/v1/posts/:postId', (req, res) => {
   const { postId } = req.params // Desestructuración de objetos
   console.log(`Recibí una petición GET en la ruta /api/v1/posts/${postId}`)
 
-  const post = postsData.find((post) => post.id === parseInt(postId))
+  const post = find((post) => post.id === parseInt(postId))
 
   if (post) {
     res.json(post)
@@ -61,13 +63,13 @@ app.get('/api/v1/posts', (req, res) => {
 
   let filteredPost = postsData
 
-  if(userId) {
+  if (userId) {
     filteredPost = filteredPost.filter((post) => post.userId === parseInt(userId))
   }
-  if(title) {
+  if (title) {
     filteredPost = filteredPost.filter((post) => post.title.includes(title))
   }
-  if(body) {
+  if (body) {
     filteredPost = filteredPost.filter((post) => post.body.includes(body))
   }
 
