@@ -1,5 +1,5 @@
 import postsData from '../data/posts.json' with { type: "json" }
-
+//modelo sirve para comunicarse con la base de datos
 //create
 export const createPost = (postData) => {
     const newPost = {
