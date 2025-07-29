@@ -1,8 +1,11 @@
 // #1 Importar express
+import dotenv from 'dotenv'
 import express, { json, urlencoded } from 'express'
 import cors from 'cors'
 import posRoutes from './routes/posRoutes.js'
+import connectDB from './config/db.js'
 
+dotenv.config()
 // ...el resto de tu código igual...
 
 // #2a Crear una instancia de express (app)
@@ -33,6 +36,9 @@ app.get('/', (req, res) => {
 })
 // integrar las rutas de posts
 app.use('/api/v1/posts', posRoutes)
+
+// Conectar a la base de datos
+connectDB()
 
 // #4 starting the server
 app.listen(port, () => {
