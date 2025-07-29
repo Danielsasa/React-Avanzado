@@ -35,3 +35,7 @@ export const updatePost = async (id, postDataToUpdate) => {
 }
 
 // delete
+export const deletePost = async (id) => {
+  const result = await Post.findByIdAndDelete(id)
+  return result !== null // Devuelve true si se eliminó, false si no se encontró
+}
