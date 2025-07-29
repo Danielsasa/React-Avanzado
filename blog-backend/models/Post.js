@@ -1,48 +1,37 @@
-import postsData from '../data/posts.json' with { type: "json" }
-//modelo sirve para comunicarse con la base de datos
-//create
-export const createPost = (postData) => {
-    const newPost = {
-        id: postData.length > 0 ? Math.max(...postsData.map(post => post.id)) + 1 : 1,
-        userId: postData.userId,
-        title: postData.title,
-        body: postData.body,
-        ... postData
-    }
-    postsData.push(newPost)
-    return newPost
+import mongoose from 'mongoose'
+import postSchema from '../schemas/postSchema.js'
+
+// Creo el modelo apartir del esquema
+const Post = mongoose.model('Post', postSchema)
+
+// create
+export const createPost = async (postData) => {
+  const newPost = new Post({
+    userId: postData.userId,
+    title: postData.title,
+    body: postData.body,
+    imageUrl: postData.imageUrl,
+    ...postData
+  })
+  return await newPost.save()
 }
 
-
-//read
-export const getPosts = () => {
-    return postsData
+// read
+export const getPosts = async () => {
+  return await Post.find().sort({ createdAt: -1 }) // Ordenar por fecha de creación descendente
 }
 
-export const getPost = (id) => {
-    return postsData.find(post => post.id === parseInt(id))
+export const getPost = async (id) => {
+  return await Post.findById(id)
+}
+// update
+export const updatePost = async (id, postDataToUpdate) => {
+  const updatedPost = await Post.findByIdAndUpdate(
+    id,
+    { $set: postDataToUpdate }, // $set-> Actualiza solo los campos especificados
+    { new: true, runValidators: true } // Devuelve el documento actualizado y valida los cambios
+  )
+  return updatedPost
 }
 
-//update
-export const updatePost = (id, postDataToUpdate) => {
-    const postIndex = postsData.findIndex(post => post.id === parseInt(id))
-    if (postIndex === -1) {
-        return null
-    }
-    const updatedPost = {
-        ...postsData[postIndex],
-        ...postDataToUpdate
-    }
-    postsData[postIndex] = updatedPost
-    return updatedPost
-}
-//delete
-
-export const deletePost = (id) => {
-    const postIndex = postsData.findIndex(post => post.id === parseInt(id))
-    if (postIndex === -1) {
-        return null
-    }
-    postsData.splice(postIndex, 1)
-    return true
-}
+// delete

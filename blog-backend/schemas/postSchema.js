@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 // definir el esquema de un post
 const postSchema = new mongoose.Schema({
-  userId: { type: Number, required: true },
+  userId: { type: Number, required: true }, // ID del usuario que creó el post
   title: { type: String, required: true, trim: true },
   body: { type: String, required: true },
   imageUrl: { type: String, required: true }
